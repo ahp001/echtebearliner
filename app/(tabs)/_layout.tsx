@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { router, Tabs } from "expo-router";
 import { Pressable, View } from "react-native";
 
 import HeaderBrand from "../../components/HeaderBrand";
@@ -32,18 +32,22 @@ export default function TabsLayout() {
         headerTitle: () => <HeaderBrand />,
 
         // 👇 Rechts: Profil Icon
-        headerRight: () => (
-          <View style={{ paddingRight: 14 }}>
-            <Pressable
-              onPress={() => {
-                // TODO: später zu Profil/Account Screen navigieren
-              }}
-              hitSlop={10}
-            >
-              <Ionicons name="person-circle-outline" size={28} color={COLORS.text} />
-            </Pressable>
-          </View>
-        ),
+       headerRight: () => (
+  <View style={{ paddingRight: 14 }}>
+    <Pressable
+      onPress={() => {
+        router.push("/profile");
+      }}
+      hitSlop={10}
+    >
+      <Ionicons
+        name="person-circle-outline"
+        size={28}
+        color={COLORS.text}
+      />
+    </Pressable>
+  </View>
+),
 
         // Links nix (wie bei vielen Brand-Apps)
         headerLeft: () => null,
