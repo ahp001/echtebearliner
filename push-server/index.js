@@ -7,7 +7,6 @@ app.get("/health", (req, res) => {
   res.json({ ok: true });
 });
 
-// Expo Push: send message
 app.post("/send", async (req, res) => {
   try {
     const { to, title, body, data } = req.body || {};
@@ -26,7 +25,7 @@ app.post("/send", async (req, res) => {
       data: data ?? {},
     };
 
-    const r = await fetch("https://exp.host/--/api/v2/push/send", {
+    const response = await fetch("https://exp.host/--/api/v2/push/send", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -36,10 +35,26 @@ app.post("/send", async (req, res) => {
       body: JSON.stringify(message),
     });
 
-    const json = await r.json();
-    return res.json({ ok: true, expo: json });
-  } catch (e) {
-    return res.status(500).json({ ok: false, error: String(e) });
+    const text = await response.text();
+
+    let expoResponse;
+    try {
+      expoResponse = JSON.parse(text);
+    } catch {
+      expoResponse = { raw: text };
+    }
+
+    return res.json({
+      ok: true,
+      status: response.status,
+      expo: expoResponse,
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      ok: false,
+      error: String(error),
+    });
   }
 });
 
