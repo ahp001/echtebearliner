@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/health", (req, res) => {
-  res.json({ ok: true });
+  res.json({ ok: true, version: "debed87" });
 });
 
 app.post("/send", async (req, res) => {
