@@ -87,7 +87,7 @@ export default function Standorte() {
               style={{ flex: 1 }}
             >
               <ImageBackground
-                source={require("../../assets/images/grafik.png")}
+                source={require("../../assets/images/grafik-optimiert.jpg")}
                 resizeMode="cover"
                 style={{
                   height: 170,
