@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Animated, Pressable, Text, View } from "react-native";
 import Logo from "../../assets/das-original-spiess.svg";
 
+import { getPushToken } from "@/lib/push";
+
 const COLORS = {
   bg: "#0B0B0B",
   text: "#FFFFFF",
@@ -14,6 +16,12 @@ const COLORS = {
 
 export default function HomeScreen() {
   const router = useRouter();
+
+  const handleGetToken = async () => {
+  const t = await getPushToken();
+  console.log("EXPO TOKEN:", t);
+  alert(t ?? "no token");
+};
 
   // ✅ echte CountUp-Zahl (wie “Raffer”)
   const countAnim = useRef(new Animated.Value(0)).current;
@@ -142,6 +150,22 @@ export default function HomeScreen() {
               Zu Standorten
             </Text>
           </Pressable>
+          <Pressable
+  onPress={handleGetToken}
+  style={{
+    marginTop: 10,
+    backgroundColor: "rgba(255,255,255,0.10)",
+    paddingVertical: 13,
+    borderRadius: 16,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.18)",
+  }}
+>
+  <Text style={{ color: COLORS.text, fontWeight: "900", letterSpacing: 0.4 }}>
+    Push Token anzeigen
+  </Text>
+</Pressable>
         </View>
 
         {/* Brand line */}
