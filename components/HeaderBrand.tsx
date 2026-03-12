@@ -5,7 +5,7 @@ export default function HeaderBrand() {
   return (
     <View style={{ alignItems: "center", justifyContent: "center" }}>
       {/* Größe anpassen je nach SVG */}
-      <Logo width={150} height={28} />
+      <Logo width={200} height={60} />
     </View>
   );
 }

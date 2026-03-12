@@ -43,6 +43,6 @@ app-example
 /android
 
 # large assets
-assets/images/*.png
+# assets/images/*.png
 *.xlsx
 

@@ -45,7 +45,7 @@ export default function RegisterScreen() {
       );
 
       Alert.alert("Erfolgreich", "Konto erstellt!");
-      router.replace("/");
+      router.replace("/(tabs)");
     } catch (e: any) {
       Alert.alert("Fehler", e?.message ?? "Registrierung fehlgeschlagen.");
     } finally {
@@ -56,9 +56,16 @@ export default function RegisterScreen() {
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: COLORS.bg }}
-      contentContainerStyle={{ padding: 20, paddingTop: 40 }}
+      contentContainerStyle={{ padding: 20, paddingTop: 100 }}
     >
-      <Text style={{ color: COLORS.text, fontSize: 26, fontWeight: "900", marginBottom: 20 }}>
+      <Text
+        style={{
+          color: COLORS.text,
+          fontSize: 26,
+          fontWeight: "900",
+          marginBottom: 20,
+        }}
+      >
         Registrieren
       </Text>
 
@@ -84,8 +91,16 @@ export default function RegisterScreen() {
         </Text>
       </Pressable>
 
-      <Pressable onPress={() => router.back()} style={{ marginTop: 16 }}>
-        <Text style={{ color: COLORS.muted }}>Zurück</Text>
+      <Pressable
+        onPress={() => router.push("/(auth)/login")}
+        style={{ marginTop: 18, alignItems: "center" }}
+      >
+        <Text style={{ color: COLORS.muted }}>
+          Schon ein Konto?{" "}
+          <Text style={{ color: COLORS.accent, fontWeight: "700" }}>
+            Anmelden
+          </Text>
+        </Text>
       </Pressable>
     </ScrollView>
   );

@@ -46,7 +46,7 @@ console.log("PUSH TOKEN:", token);
         );
       }
 
-      router.replace("/"); // Home
+      router.replace("/(tabs)");// Home
     } catch (e: any) {
       console.log("LOGIN ERROR:", e?.code, e?.message);
       Alert.alert("Login fehlgeschlagen", e?.message ?? "Unbekannter Fehler");
@@ -58,7 +58,7 @@ console.log("PUSH TOKEN:", token);
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: COLORS.bg }}
-      contentContainerStyle={{ padding: 20, paddingTop: 40 }}
+      contentContainerStyle={{ padding: 20, paddingTop: 100 }}
     >
       <Text
         style={{
