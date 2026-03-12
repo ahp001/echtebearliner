@@ -34,7 +34,7 @@ const ORDER_IMAGES: Record<Lang, ImageSourcePropType> = {
   en: require("../../assets/images/bestellenbild/bestellen_english.png"),
   hr: require("../../assets/images/bestellenbild/bestellen_kroatisch.png"),
   sq: require("../../assets/images/bestellenbild/bestellen_albanisch.png"),
-  tr: require("../../assets/images/bestellenbild/bestellen_türkish.png"),
+  tr: require("../../assets/images/bestellenbild/bestellen_turkish.png"),
 };
 
 const COUPON_IMAGES: Record<Lang, ImageSourcePropType> = {
@@ -42,7 +42,7 @@ const COUPON_IMAGES: Record<Lang, ImageSourcePropType> = {
   en: require("../../assets/images/coupons/coupons_english.jpeg"),
   hr: require("../../assets/images/coupons/coupons_kroatisch.jpeg"),
   sq: require("../../assets/images/coupons/coupons_albanisch.jpeg"),
-  tr: require("../../assets/images/coupons/coupons_türkish.jpeg"),
+  tr: require("../../assets/images/coupons/coupons_turkish.jpeg"),
 };
 
 const COUPON_BUTTON_TEXT: Record<Lang, string> = {
@@ -58,7 +58,7 @@ const FRANCHISE_IMAGES: Record<Lang, ImageSourcePropType> = {
   en: require("../../assets/images/frenchisepartnerwerden/frenchise_english.jpeg"),
   hr: require("../../assets/images/frenchisepartnerwerden/frenchise_kroatisch.jpeg"),
   sq: require("../../assets/images/frenchisepartnerwerden/frenchise_albanisch.jpeg"),
-  tr: require("../../assets/images/frenchisepartnerwerden/frenchise_türkish.jpeg"),
+  tr: require("../../assets/images/frenchisepartnerwerden/frenchise_turkish.jpeg"),
 };
 
 const FRANCHISE_BUTTON_TEXT: Record<Lang, string> = {
