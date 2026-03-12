@@ -265,7 +265,7 @@ const PRODUCTS: ProductItem[] = [
       sq: "Döner",
       tr: "Döner",
     },
-    image: require("../../assets/images/speisekarte/döner_das_original.jpeg"),
+    image: require("../../assets/images/speisekarte/doener_das_original.jpeg"),
     title: {
       de: "Döner Das Original",
       en: "Doner The Original",
@@ -415,7 +415,7 @@ const PRODUCTS: ProductItem[] = [
       sq: "Döner",
       tr: "Döner",
     },
-    image: require("../../assets/images/speisekarte/döner_das_original.jpeg"),
+    image: require("../../assets/images/speisekarte/doener_das_original.jpeg"),
     title: {
       de: "Döner Tempelhof",
       en: "Tempelhof Doner",
