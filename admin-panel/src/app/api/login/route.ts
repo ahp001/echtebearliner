@@ -1,6 +1,9 @@
+export const dynamic = "force-dynamic";
+
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminToken } from "../../../lib/session";
+
 
 export async function POST(req: NextRequest) {
   try {
