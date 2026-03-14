@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "echtebearliner",
+    "name": "ECHTE BÄRLINER",
     "slug": "echtebearliner",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -10,13 +10,14 @@
     "newArchEnabled": true,
 
     "ios": {
-      "bundleIdentifier": "de.echtebearliner.app",
-      "supportsTablet": true,
-      "googleServicesFile": "./GoogleService-Info.plist",
-      "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
-      }
-    },
+  "bundleIdentifier": "de.echtebearliner.app",
+  "supportsTablet": true,
+  "googleServicesFile": "./GoogleService-Info.plist",
+  "infoPlist": {
+    "ITSAppUsesNonExemptEncryption": false,
+    "CFBundleDisplayName": "ECHTE BÄRLINER"
+  }
+},
 
     "android": {
       "package": "de.echtebearliner.app",
@@ -44,18 +45,17 @@
         }
       ],
       [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/loading/loading.jpeg",
-          "imageWidth": 220,
-          "resizeMode": "contain",
-          "backgroundColor": "#000000",
-          "dark": {
-            "image": "./assets/images/loading/loading.jpeg",
-            "backgroundColor": "#000000"
-          }
-        }
-      ],
+  "expo-splash-screen",
+  {
+    "image": "./assets/images/loading/loading.jpeg",
+    "resizeMode": "cover",
+    "backgroundColor": "#000000",
+    "dark": {
+      "image": "./assets/images/loading/loading.jpeg",
+      "backgroundColor": "#000000"
+    }
+  }
+],
       "expo-font"
     ],
 

@@ -6,6 +6,7 @@ import { Pressable, View } from "react-native";
 import { getLanguage, translations } from "@/lib/i18n";
 import HeaderBrand from "../../components/HeaderBrand";
 
+
 const COLORS = {
   bg: "#0B0B0B",
   text: "#FFFFFF",

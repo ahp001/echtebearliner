@@ -1,5 +1,5 @@
 import { getLanguage, translations } from "@/lib/i18n";
-import { getPushToken } from "@/lib/push";
+
 import { Ionicons } from "@expo/vector-icons";
 import { ResizeMode, Video } from "expo-av";
 import { useRouter } from "expo-router";
@@ -106,15 +106,6 @@ export default function HomeScreen() {
     }, 50);
 
     return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const timeout = setTimeout(async () => {
-      const token = await getPushToken();
-      if (token) console.log("EXPO TOKEN:", token);
-    }, 1200);
-
-    return () => clearTimeout(timeout);
   }, []);
 
   const fadeInVideo = () => {
@@ -275,7 +266,7 @@ export default function HomeScreen() {
               </Pressable>
 
               <Pressable
-                onPress={() => router.push("/(tabs)/more")}
+                onPress={() => router.push("/partnerwerden")}
                 style={styles.button}
               >
                 <Text style={styles.buttonText}>{franchiseButtonText}</Text>
@@ -313,11 +304,7 @@ export default function HomeScreen() {
               </Pressable>
 
               <Pressable
-                onPress={() =>
-                  openExternalLink(
-                    "https://www.ubereats.com/de?srsltid=AfmBOopLouCDv9qwsPtSX_ll9JmPQKEk2g2gW7bEVGcLCxTQEKFNcfBc"
-                  )
-                }
+                onPress={() => openExternalLink("https://www.ubereats.com/de")}
                 style={styles.deliveryLogoPress}
               >
                 <Image
@@ -328,11 +315,7 @@ export default function HomeScreen() {
               </Pressable>
 
               <Pressable
-                onPress={() =>
-                  openExternalLink(
-                    "https://wolt.com/de/deu?srsltid=AfmBOoqChTBxmgIpOcW845-3HdbNsE-2hJqZfUeJur7gOSw11ec87m1k"
-                  )
-                }
+                onPress={() => openExternalLink("https://wolt.com/de")}
                 style={styles.deliveryLogoPress}
               >
                 <Image

@@ -9,6 +9,7 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { auth } from "@/lib/firebase";
 
+import { syncPushTokenToUser } from "@/lib/push";
 // Splash direkt blockieren
 SplashScreen.preventAutoHideAsync();
 
@@ -34,6 +35,17 @@ export default function RootLayout() {
 
     return unsub;
   }, []);
+
+  useEffect(() => {
+  async function syncPush() {
+    if (!authReady) return;
+    if (!user?.uid) return;
+
+    await syncPushTokenToUser(user.uid);
+  }
+
+  syncPush();
+}, [authReady, user?.uid]);
 
   useEffect(() => {
     if (!navigationState?.key) return;
@@ -71,18 +83,19 @@ export default function RootLayout() {
   }, [authReady, user, segments, navigationState?.key, router]);
 
   useEffect(() => {
-    async function hideSplashWhenReady() {
-      if (!layoutReady) return;
+  async function hideSplashWhenReady() {
+    if (!layoutReady) return;
 
-      try {
-        await SplashScreen.hideAsync();
-      } catch (error) {
-        console.log("Splash hide error:", error);
-      }
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await SplashScreen.hideAsync();
+    } catch (error) {
+      console.log("Splash hide error:", error);
     }
+  }
 
-    hideSplashWhenReady();
-  }, [layoutReady]);
+  hideSplashWhenReady();
+}, [layoutReady]);
 
   // Solange Layout nicht fertig ist, Splash sichtbar lassen
   if (!layoutReady) {

@@ -73,6 +73,15 @@ const COUNTRY_NAMES: Record<string, Record<Lang, string>> = {
   },
 };
 
+const COUNTRY_FLAGS: Record<string, string> = {
+  Deutschland: "🇩🇪",
+  Österreich: "🇦🇹",
+  Schweiz: "🇨🇭",
+  Kosovo: "🇽🇰",
+  Kroatien: "🇭🇷",
+  Türkei: "🇹🇷",
+};
+
 const UI_TEXT: Record<
   Lang,
   {
@@ -234,8 +243,9 @@ export default function Standorte() {
         {LOCATIONS_BY_COUNTRY.map((group) => (
           <View key={group.country} style={styles.section}>
             <Text style={styles.countryHeader}>
-              {COUNTRY_NAMES[group.country]?.[lang] ?? group.country}
-            </Text>
+  {COUNTRY_NAMES[group.country]?.[lang] ?? group.country}
+  {COUNTRY_FLAGS[group.country] ? ` ${COUNTRY_FLAGS[group.country]}` : ""}
+</Text>
 
             <FlatList
               data={group.locations}
