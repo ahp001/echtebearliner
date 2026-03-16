@@ -64,11 +64,13 @@ export async function POST(req: Request) {
     }
 
     const messages = tokens.map((token) => ({
-      to: token,
-      sound: "default",
-      title: title.trim(),
-      body: body.trim(),
-    }));
+  to: token,
+  sound: "default",
+  title: title.trim(),
+  body: body.trim(),
+  channelId: "default",
+  priority: "high",
+}));
 
     const res = await fetch("https://exp.host/--/api/v2/push/send", {
       method: "POST",
@@ -80,6 +82,8 @@ export async function POST(req: Request) {
     });
 
     const data = await res.json();
+
+    console.log("Expo push response:", JSON.stringify(data, null, 2));
 
     await adminDb.collection("campaigns").add({
   title: title.trim(),
