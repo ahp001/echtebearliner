@@ -6,10 +6,10 @@ import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
   Animated,
   Pressable,
-  ScrollView,
+  SectionList,
   StyleSheet,
   Text,
-  View,
+  View
 } from "react-native";
 
 const COLORS = {
@@ -34,7 +34,14 @@ type LocalizedText = {
 
 type ProductItem = {
   key: string;
-  section: "doener" | "durum" | "boxen" | "snacks" | "menues" | "kids" | "speziteller";
+  section:
+    | "doener"
+    | "durum"
+    | "boxen"
+    | "snacks"
+    | "menues"
+    | "kids"
+    | "speziteller";
   image: any;
   title: LocalizedText;
   desc: LocalizedText;
@@ -86,7 +93,7 @@ const PRODUCTS: ProductItem[] = [
       de: "Für den großen Appetit mit einer extra Portion Hähnchen- oder Kalbfleisch. Vollendet mit erntefrischem Salat, Zwiebeln und unseren hausgemachten Saucen.",
       en: "For a big appetite with an extra portion of chicken or veal. Finished with fresh salad, onions, and our homemade sauces.",
       hr: "Za veliki apetit s dodatnom porcijom piletine ili teletine. Dovršeno svježom salatom, lukom i našim domaćim umacima.",
-      sq: "Për oreks të madh me një porcion shtesë pule ose viçi. Përfundon me sallatë të freskët, qepë dhe salcat tona shtëpiake.",
+      sq: "Për oreks të madh me një porcion shtesë pule ose viçi. Përfundon me sallatë të freskëta, qepë dhe salcat tona shtëpiake.",
       tr: "Büyük iştahlar için ekstra tavuk veya dana eti porsiyonu ile hazırlanır. Taze salata, soğan ve ev yapımı soslarımızla tamamlanır.",
     },
   },
@@ -124,7 +131,7 @@ const PRODUCTS: ProductItem[] = [
       de: "Ein besonderes Geschmackserlebnis durch feines Grillgemüse und wahlweise Kalbs- oder Hähnchenfleisch. Serviert mit frischem Rotkohl, Eisbergsalat und unseren hausgemachten Saucen.",
       en: "A special taste experience with fine grilled vegetables and optional veal or chicken. Served with fresh red cabbage, iceberg lettuce, and our homemade sauces.",
       hr: "Posebno iskustvo okusa zahvaljujući finom grilanom povrću i po izboru teletini ili piletini. Posluženo sa svježim crvenim kupusom, ledenom salatom i našim domaćim umacima.",
-      sq: "Një përvojë e veçantë shijeje me perime të pjekura dhe sipas zgjedhjes mish viçi ose pule. Shërbehet me lakër të kuqe të freskët, sallatë iceberg dhe salcat tona shtëpiake.",
+      sq: "Një përvojë e veçantë shijeje me perime të pjekura dhe sipas zgjedhjes mish viçi ose pule. Shërbehet me lakër të kuqe të freskëta, sallatë iceberg dhe salcat tona shtëpiake.",
       tr: "İnce ızgara sebzeler ve isteğe göre dana veya tavuk eti ile özel bir lezzet deneyimi. Taze mor lahana, iceberg marul ve ev yapımı soslarımızla servis edilir.",
     },
   },
@@ -258,7 +265,7 @@ const PRODUCTS: ProductItem[] = [
       de: "Mit feinem Grillgemüse und Fleisch nach Wahl frisch gerollt. Dazu frischer Salat und unsere hausgemachten Saucen für ein besonderes Geschmackserlebnis.",
       en: "Freshly rolled with fine grilled vegetables and meat of your choice. Served with fresh salad and our homemade sauces for a special taste experience.",
       hr: "Svježe zarolani dürüm s finim grilanim povrćem i mesom po izboru. Uz svježu salatu i naše domaće umake za posebno iskustvo okusa.",
-      sq: "Dürüm i freskët i mbështjellë me perime të pjekura dhe mish sipas zgjedhjes. Shoqërohet me sallatë të freskët dhe salcat tona shtëpiake për një shije të veçantë.",
+      sq: "Dürüm i freskët i mbështjellë me perime të pjekura dhe mish sipas zgjedhjes. Shoqërohet me sallatë të freskëta dhe salcat tona shtëpiake për një shije të veçantë.",
       tr: "İnce ızgara sebzeler ve seçtiğiniz et ile taze sarılır. Taze salata ve ev yapımı soslarla özel bir lezzet sunar.",
     },
   },
@@ -361,7 +368,7 @@ const PRODUCTS: ProductItem[] = [
   {
     key: "box_kreuzberg",
     section: "boxen",
-    image: require("../../assets/images/speisekarte/box_kreuzberg.jpeg"),
+    image: require("../../assets/images/speisekarte/box_kreuzberg.jpeg"), 
     title: {
       de: "Kreuzberg",
       en: "Kreuzberg",
@@ -411,7 +418,7 @@ const PRODUCTS: ProductItem[] = [
       de: "Herzhaftes Kalbs- oder Hähnchenfleisch trifft auf knusprige Pommes frites direkt in der Box. Abgerundet durch frischen Salat, Zwiebeln und unsere hausgemachten Saucen.",
       en: "Hearty veal or chicken meets crispy fries directly in the box. Finished with fresh salad, onions, and our homemade sauces.",
       hr: "Sočno teleće ili pileće meso susreće hrskavi pomfrit izravno u boxu. Zaokruženo svježom salatom, lukom i našim domaćim umacima.",
-      sq: "Mishi i shijshëm i viçit ose pulës takohet me patate të skuqura krokante direkt në kuti. Plotësohet me sallatë të freskët, qepë dhe salcat tona shtëpiake.",
+      sq: "Mishi i shijshëm i viçit ose pulës takohet me patate të skuqura krokante direkt në kuti. Plotësohet me sallatë të freskëta, qepë dhe salcat tona shtëpiake.",
       tr: "Lezzetli dana veya tavuk eti, çıtır patates kızartmasıyla kutuda buluşuyor. Taze salata, soğan ve ev yapımı soslarla tamamlanır.",
     },
   },
@@ -437,7 +444,7 @@ const PRODUCTS: ProductItem[] = [
   {
     key: "box_moabit_veggie",
     section: "boxen",
-    image: require("../../assets/images/speisekarte/box_moabit_veggie.png"),
+    image: require("../../assets/images/speisekarte/box_moabit_veggie.jpeg"),
     title: {
       de: "Moabit Veggie",
       en: "Moabit Veggie",
@@ -704,7 +711,7 @@ const SECTION_ORDER: SectionConfig[] = [
       "box_schoeneberg",
       "box_neukoeln",
       "box_tempelhof",
-      "box_moabit_veggie",
+     
     ],
   },
   {
@@ -765,8 +772,13 @@ const SECTION_ORDER: SectionConfig[] = [
 
 export default function Produkte() {
   const [lang, setLang] = useState<Lang>("de");
-  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
+  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>(
+    {}
+  );
+  const [screenFocused, setScreenFocused] = useState(true);
+
   const videoOpacity = useRef(new Animated.Value(0)).current;
+ 
 
   const posterOpacity = videoOpacity.interpolate({
     inputRange: [0, 1],
@@ -775,11 +787,18 @@ export default function Produkte() {
 
   useFocusEffect(
     useCallback(() => {
+      setScreenFocused(true);
+
       async function loadLanguage() {
         const currentLang = await getLanguage();
         setLang((currentLang as Lang) || "de");
       }
+
       loadLanguage();
+
+      return () => {
+        setScreenFocused(false);
+      };
     }, [])
   );
 
@@ -819,92 +838,106 @@ export default function Produkte() {
   const groupedProducts = useMemo(() => {
     const productMap = new Map(PRODUCTS.map((item) => [item.key, item]));
 
-    return SECTION_ORDER.map((section) => ({
-      key: section.key,
-      title: section.title[lang],
-      items: section.itemKeys
-        .map((itemKey) => productMap.get(itemKey))
-        .filter(Boolean) as ProductItem[],
-    })).filter((section) => section.items.length > 0);
+    return SECTION_ORDER
+      .map((section) => ({
+        key: section.key,
+        title: section.title[lang],
+        data: section.itemKeys
+          .map((itemKey) => productMap.get(itemKey))
+          .filter(Boolean) as ProductItem[],
+      }))
+      .filter((section) => section.data.length > 0);
   }, [lang]);
 
-  return (
-    <View style={styles.screen}>
-      <View style={styles.posterWrapper}>
-        <Animated.Image
-          source={require("../../assets/images/loading/loading.jpeg")}
-          style={[styles.posterImage, { opacity: posterOpacity }]}
-          resizeMode="contain"
-        />
+  const renderProductCard = (product: ProductItem) => {
+    const isExpanded = !!expandedItems[product.key];
+    const fullText = product.desc[lang];
+    const visibleText = isExpanded ? fullText : getFirstSentence(fullText);
+
+    return (
+      <View style={styles.card}>
+        <ExpoImage
+  source={product.image}
+  style={styles.image}
+  contentFit="cover"
+  transition={0}
+  cachePolicy="memory-disk"
+/>
+
+        <Text style={styles.title}>{product.title[lang]}</Text>
+        <Text style={styles.desc}>{visibleText}</Text>
+
+        <Pressable
+          style={styles.button}
+          onPress={() => toggleExpanded(product.key)}
+        >
+          <Text style={styles.buttonText}>
+            {isExpanded ? lessText : moreText}
+          </Text>
+        </Pressable>
       </View>
+    );
+  };
 
-      <Animated.View
-        style={[StyleSheet.absoluteFillObject, { opacity: videoOpacity }]}
-      >
-        <Video
-          source={require("../../assets/hero.mp4")}
-          style={StyleSheet.absoluteFillObject}
-          resizeMode={ResizeMode.COVER}
-          shouldPlay
-          isLooping
-          isMuted
-          onReadyForDisplay={handleReady}
-          onError={(e) => console.log("VIDEO ERROR", e)}
-        />
-      </Animated.View>
+  return (
+  <View style={styles.screen}>
+    <View style={styles.posterWrapper}>
+      <Animated.Image
+        source={require("../../assets/images/loading/loading.jpeg")}
+        style={[styles.posterImage, { opacity: posterOpacity }]}
+        resizeMode="cover"
+      />
+    </View>
 
-      <View style={styles.overlay} />
+    <Animated.View
+      pointerEvents="none"
+      style={[StyleSheet.absoluteFillObject, { opacity: videoOpacity }]}
+    >
+      <Video
+        source={require("../../assets/hero.mp4")}
+        style={StyleSheet.absoluteFillObject}
+        resizeMode={ResizeMode.COVER}
+        shouldPlay={screenFocused}
+        isLooping
+        isMuted
+        onLoad={handleReady}
+        onReadyForDisplay={handleReady}
+        onError={(e) => console.log("VIDEO ERROR", e)}
+      />
+    </Animated.View>
 
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+    <View style={styles.overlay} />
+
+    <SectionList
+      sections={groupedProducts}
+      keyExtractor={(item) => item.key}
+      renderItem={({ item }) => renderProductCard(item)}
+      renderSectionHeader={({ section }) => (
+        <View style={styles.sectionHeaderWrap}>
+          <View style={styles.categoryHeader}>
+            <Text style={styles.categoryHeaderText}>{section.title}</Text>
+          </View>
+        </View>
+      )}
+      style={styles.scroll}
+      contentContainerStyle={styles.scrollContent}
+      showsVerticalScrollIndicator={false}
+      stickySectionHeadersEnabled={false}
+      removeClippedSubviews={true}
+      initialNumToRender={2}
+      maxToRenderPerBatch={2}
+      windowSize={2}
+      updateCellsBatchingPeriod={120}
+      SectionSeparatorComponent={() => <View style={styles.sectionGap} />}
+      ListHeaderComponent={
         <View style={styles.inner}>
           <Text style={styles.pageTitle}>{pageTitle}</Text>
-
-          {groupedProducts.map((group) => (
-            <View key={group.key} style={styles.section}>
-              <View style={styles.categoryHeader}>
-                <Text style={styles.categoryHeaderText}>{group.title}</Text>
-              </View>
-
-              {group.items.map((product) => {
-                const isExpanded = !!expandedItems[product.key];
-                const fullText = product.desc[lang];
-                const visibleText = isExpanded
-                  ? fullText
-                  : getFirstSentence(fullText);
-
-                return (
-                  <View key={product.key} style={styles.card}>
-                    <ExpoImage
-                      source={product.image}
-                      style={styles.image}
-                      contentFit="cover"
-                      transition={150}
-                    />
-
-                    <Text style={styles.title}>{product.title[lang]}</Text>
-                    <Text style={styles.desc}>{visibleText}</Text>
-
-                    <Pressable
-                      style={styles.button}
-                      onPress={() => toggleExpanded(product.key)}
-                    >
-                      <Text style={styles.buttonText}>
-                        {isExpanded ? lessText : moreText}
-                      </Text>
-                    </Pressable>
-                  </View>
-                );
-              })}
-            </View>
-          ))}
         </View>
-      </ScrollView>
-    </View>
-  );
+      }
+      renderSectionFooter={() => <View style={styles.sectionFooterSpace} />}
+    />
+  </View>
+);
 }
 
 const styles = StyleSheet.create({
@@ -921,6 +954,7 @@ const styles = StyleSheet.create({
   },
   inner: {
     padding: 16,
+    paddingBottom: 0,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
@@ -932,8 +966,14 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     marginBottom: 18,
   },
-  section: {
-    marginBottom: 14,
+  sectionHeaderWrap: {
+    paddingHorizontal: 16,
+  },
+  sectionGap: {
+    height: 2,
+  },
+  sectionFooterSpace: {
+    height: 8,
   },
   categoryHeader: {
     backgroundColor: COLORS.category,
@@ -951,18 +991,19 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
   card: {
-    backgroundColor: COLORS.card,
-    borderWidth: 1,
-    borderColor: COLORS.border,
-    borderRadius: 20,
-    padding: 14,
-    marginBottom: 16,
-  },
+  backgroundColor: "#111111",
+  borderWidth: 1,
+  borderColor: "rgba(255,255,255,0.08)",
+  borderRadius: 16,
+  padding: 14,
+  marginBottom: 16,
+  marginHorizontal: 16,
+},
   image: {
-    width: "100%",
-    height: 180,
-    borderRadius: 16,
-  },
+  width: "100%",
+  height: 140,
+  borderRadius: 16,
+},
   title: {
     color: COLORS.text,
     fontSize: 18,

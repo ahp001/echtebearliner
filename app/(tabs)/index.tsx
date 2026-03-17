@@ -319,7 +319,7 @@ export default function HomeScreen() {
                 style={styles.deliveryLogoPress}
               >
                 <Image
-                  source={require("../../assets/images/lieferketten/wolt.png")}
+                  source={require("../../assets/images/lieferketten/wolt.jpg")}
                   style={styles.deliveryLogo}
                   resizeMode="cover"
                 />

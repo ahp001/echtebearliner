@@ -3,7 +3,14 @@ import { db } from "@/lib/firebase";
 import { router } from "expo-router";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
-import { Alert, Pressable, ScrollView, Text, TextInput } from "react-native";
+import {
+  Alert,
+  Image,
+  Pressable,
+  ScrollView,
+  Text,
+  TextInput,
+} from "react-native";
 
 const COLORS = {
   bg: "#0B0B0B",
@@ -56,8 +63,23 @@ export default function RegisterScreen() {
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: COLORS.bg }}
-      contentContainerStyle={{ padding: 20, paddingTop: 100 }}
+      contentContainerStyle={{
+        padding: 20,
+        paddingTop: 140,
+      }}
     >
+      {/* LOGO */}
+      <Image
+        source={require("../../assets/images/main1.png")}
+        resizeMode="contain"
+        style={{
+          width: 140,
+          height: 140,
+          alignSelf: "center",
+          marginBottom: 20,
+        }}
+      />
+
       <Text
         style={{
           color: COLORS.text,
@@ -69,11 +91,38 @@ export default function RegisterScreen() {
         Registrieren
       </Text>
 
-      <Input placeholder="Vorname" value={firstName} onChangeText={setFirstName} />
-      <Input placeholder="Nachname" value={lastName} onChangeText={setLastName} />
-      <Input placeholder="Telefon" value={phone} onChangeText={setPhone} keyboardType="phone-pad" />
-      <Input placeholder="E-Mail" value={email} onChangeText={setEmail} keyboardType="email-address" />
-      <Input placeholder="Passwort (min. 6 Zeichen)" value={pw} onChangeText={setPw} secureTextEntry />
+      <Input
+        placeholder="Vorname"
+        value={firstName}
+        onChangeText={setFirstName}
+      />
+
+      <Input
+        placeholder="Nachname"
+        value={lastName}
+        onChangeText={setLastName}
+      />
+
+      <Input
+        placeholder="Telefon"
+        value={phone}
+        onChangeText={setPhone}
+        keyboardType="phone-pad"
+      />
+
+      <Input
+        placeholder="E-Mail"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+      />
+
+      <Input
+        placeholder="Passwort (min. 6 Zeichen)"
+        value={pw}
+        onChangeText={setPw}
+        secureTextEntry
+      />
 
       <Pressable
         onPress={onRegister}

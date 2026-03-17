@@ -2,6 +2,7 @@ import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { Platform } from "react-native";
 import { db } from "./firebase";
 
 Notifications.setNotificationHandler({
@@ -14,35 +15,51 @@ Notifications.setNotificationHandler({
   }),
 });
 
+async function ensureAndroidNotificationChannel() {
+  if (Platform.OS !== "android") return;
+
+  await Notifications.setNotificationChannelAsync("default", {
+    name: "default",
+    importance: Notifications.AndroidImportance.MAX,
+    vibrationPattern: [0, 250, 250, 250],
+    lightColor: "#C9A227",
+    lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
+    showBadge: true,
+    sound: "default",
+  });
+}
+
 export async function getPushToken() {
   if (!Device.isDevice) {
     console.log("Push: kein echtes Gerät");
     return null;
   }
 
-  let permission = await Notifications.getPermissionsAsync();
-  let finalStatus = permission.status;
-
-  if (finalStatus !== "granted") {
-    const request = await Notifications.requestPermissionsAsync();
-    finalStatus = request.status;
-  }
-
-  if (finalStatus !== "granted") {
-    console.log("Push: Berechtigung nicht erteilt");
-    return null;
-  }
-
-  const projectId =
-    Constants.expoConfig?.extra?.eas?.projectId ??
-    Constants.easConfig?.projectId;
-
-  if (!projectId) {
-    console.log("Push: projectId fehlt");
-    return null;
-  }
-
   try {
+    await ensureAndroidNotificationChannel();
+
+    let permission = await Notifications.getPermissionsAsync();
+    let finalStatus = permission.status;
+
+    if (finalStatus !== "granted") {
+      const request = await Notifications.requestPermissionsAsync();
+      finalStatus = request.status;
+    }
+
+    if (finalStatus !== "granted") {
+      console.log("Push: Berechtigung nicht erteilt");
+      return null;
+    }
+
+    const projectId =
+      Constants.expoConfig?.extra?.eas?.projectId ??
+      Constants.easConfig?.projectId;
+
+    if (!projectId) {
+      console.log("Push: projectId fehlt");
+      return null;
+    }
+
     const token = (
       await Notifications.getExpoPushTokenAsync({ projectId })
     ).data;

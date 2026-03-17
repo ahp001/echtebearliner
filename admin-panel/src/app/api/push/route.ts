@@ -48,12 +48,13 @@ export async function POST(req: Request) {
       const token = data.pushToken;
 
       if (
-        typeof token === "string" &&
-        token.startsWith("ExponentPushToken[") &&
-        token.endsWith("]")
-      ) {
-        tokens.push(token);
-      }
+  typeof token === "string" &&
+  (token.startsWith("ExponentPushToken[") ||
+    token.startsWith("ExpoPushToken[")) &&
+  token.endsWith("]")
+) {
+  tokens.push(token);
+}
     });
 
     if (tokens.length === 0) {

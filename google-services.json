@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "886466098233",
+    "project_id": "echtebearliner",
+    "storage_bucket": "echtebearliner.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886466098233:android:350f26fa65ce68df9b09e8",
+        "android_client_info": {
+          "package_name": "de.echtebearliner.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5jscpz2vKjO0URsimuDH4SOVlTMBXb2M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

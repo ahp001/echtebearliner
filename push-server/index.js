@@ -18,12 +18,14 @@ app.post("/send", async (req, res) => {
     }
 
     const message = {
-      to,
-      sound: "default",
-      title: title ?? "EchteBärliner",
-      body: body ?? "Test Push",
-      data: data ?? {},
-    };
+  to,
+  sound: "default",
+  title: title ?? "EchteBärliner",
+  body: body ?? "Test Push",
+  data: data ?? {},
+  channelId: "default",
+  priority: "high",
+};
 
     const response = await fetch("https://exp.host/--/api/v2/push/send", {
       method: "POST",

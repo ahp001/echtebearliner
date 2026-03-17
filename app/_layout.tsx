@@ -4,13 +4,17 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { onAuthStateChanged, User } from "firebase/auth";
 import React, { useEffect, useState } from "react";
+import {
+  ImageBackground,
+  StyleSheet,
+  View,
+} from "react-native";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { auth } from "@/lib/firebase";
-
 import { syncPushTokenToUser } from "@/lib/push";
-// Splash direkt blockieren
+
 SplashScreen.preventAutoHideAsync();
 
 export const unstable_settings = {
@@ -26,6 +30,7 @@ export default function RootLayout() {
   const [user, setUser] = useState<User | null | undefined>(undefined);
   const [authReady, setAuthReady] = useState(false);
   const [layoutReady, setLayoutReady] = useState(false);
+  const [showAppLoading, setShowAppLoading] = useState(true);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (firebaseUser) => {
@@ -37,15 +42,15 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-  async function syncPush() {
-    if (!authReady) return;
-    if (!user?.uid) return;
+    async function syncPush() {
+      if (!authReady) return;
+      if (!user?.uid) return;
 
-    await syncPushTokenToUser(user.uid);
-  }
+      await syncPushTokenToUser(user.uid);
+    }
 
-  syncPush();
-}, [authReady, user?.uid]);
+    syncPush();
+  }, [authReady, user?.uid]);
 
   useEffect(() => {
     if (!navigationState?.key) return;
@@ -83,23 +88,39 @@ export default function RootLayout() {
   }, [authReady, user, segments, navigationState?.key, router]);
 
   useEffect(() => {
-  async function hideSplashWhenReady() {
-    if (!layoutReady) return;
+  if (!layoutReady) return;
 
+  let timer: ReturnType<typeof setTimeout>;
+
+  async function prepareApp() {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
       await SplashScreen.hideAsync();
+
+      timer = setTimeout(() => {
+        setShowAppLoading(false);
+      }, 2000);
     } catch (error) {
       console.log("Splash hide error:", error);
     }
   }
 
-  hideSplashWhenReady();
+  prepareApp();
+
+  return () => {
+    if (timer) clearTimeout(timer);
+  };
 }, [layoutReady]);
 
-  // Solange Layout nicht fertig ist, Splash sichtbar lassen
-  if (!layoutReady) {
-    return null;
+  if (!layoutReady || showAppLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ImageBackground
+          source={require("../assets/images/loading/loading.jpeg")}
+          style={styles.loadingImage}
+          resizeMode="cover"
+        />
+      </View>
+    );
   }
 
   return (
@@ -116,3 +137,15 @@ export default function RootLayout() {
     </ThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: "#000000",
+  },
+  loadingImage: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+  },
+});

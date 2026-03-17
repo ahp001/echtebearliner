@@ -4,7 +4,14 @@ import { getPushToken } from "@/lib/push";
 import { router } from "expo-router";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
-import { Alert, Pressable, ScrollView, Text, TextInput } from "react-native";
+import {
+  Alert,
+  Image,
+  Pressable,
+  ScrollView,
+  Text,
+  TextInput,
+} from "react-native";
 
 const COLORS = {
   bg: "#0B0B0B",
@@ -27,14 +34,14 @@ export default function LoginScreen() {
     try {
       setLoading(true);
 
-      // 1) Firebase Login
+      // Firebase Login
       const user = await loginWithEmail(email.trim(), pw);
 
-      // 2) Push Token holen (fragt Permission)
+      // Push Token holen
       const token = await getPushToken();
-console.log("PUSH TOKEN:", token);
+      console.log("PUSH TOKEN:", token);
 
-      // 3) Token in Firestore speichern
+      // Token speichern
       if (token) {
         await setDoc(
           doc(db, "users", user.uid),
@@ -46,7 +53,7 @@ console.log("PUSH TOKEN:", token);
         );
       }
 
-      router.replace("/(tabs)");// Home
+      router.replace("/(tabs)");
     } catch (e: any) {
       console.log("LOGIN ERROR:", e?.code, e?.message);
       Alert.alert("Login fehlgeschlagen", e?.message ?? "Unbekannter Fehler");
@@ -58,8 +65,23 @@ console.log("PUSH TOKEN:", token);
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: COLORS.bg }}
-      contentContainerStyle={{ padding: 20, paddingTop: 100 }}
+      contentContainerStyle={{
+        padding: 20,
+        paddingTop: 140,
+      }}
     >
+      {/* LOGO */}
+      <Image
+        source={require("../../assets/images/main1.png")}
+        resizeMode="contain"
+        style={{
+          width: 140,
+          height: 140,
+          alignSelf: "center",
+          marginBottom: 20,
+        }}
+      />
+
       <Text
         style={{
           color: COLORS.text,
@@ -104,9 +126,14 @@ console.log("PUSH TOKEN:", token);
 
       <Pressable
         onPress={() => router.push("/(auth)/register")}
-        style={{ marginTop: 16 }}
+        style={{ marginTop: 16, alignItems: "center" }}
       >
-        <Text style={{ color: COLORS.muted }}>Neu hier? Registrieren</Text>
+        <Text style={{ color: COLORS.muted }}>
+          Neu hier?{" "}
+          <Text style={{ color: COLORS.accent, fontWeight: "700" }}>
+            Registrieren
+          </Text>
+        </Text>
       </Pressable>
     </ScrollView>
   );
